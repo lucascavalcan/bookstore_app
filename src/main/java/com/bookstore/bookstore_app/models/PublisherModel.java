@@ -1,7 +1,7 @@
 package com.bookstore.bookstore_app.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.UUID;
