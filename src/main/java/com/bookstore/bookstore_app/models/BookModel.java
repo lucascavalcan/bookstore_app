@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -23,4 +25,13 @@ public class BookModel implements Serializable {
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private PublisherModel publisher;
+
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany//(fetch = FetchType.LAZY)
+    @JoinTable( //criar tabela auxiliar (já que há uma coleção de ambos os lados) - ela vai unir os ids das duas entidades
+            name = "tb_book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<AuthorModel> authors = new HashSet<>();
+
 }
